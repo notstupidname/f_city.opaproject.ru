@@ -1,0 +1,26 @@
+---
+permalink: assets/css/main.min.css
+---
+{%- capture css -%}
+@charset "UTF-8";
+
+@layer reset, basic, layout, components, utils;
+
+@layer reset {
+{%- include './01-reset.css' -%}
+}
+@layer basic {
+
+{%- include './02-basic.css' -%}
+}
+@layer layout {
+{%- include './03-layout.css' -%}
+}
+@layer components {
+{%- include-glob "src/**/components/*.css" -%}
+}
+@layer utils {
+{%- include './05-utils.css' -%}
+}
+{%- endcapture -%}
+{{ css | cssmin }}

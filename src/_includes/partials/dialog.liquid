@@ -1,0 +1,36 @@
+<dialog id="orderDialog" class="stack">
+  <header>
+    <h3>Заказ</h3>
+    <button type="button" class="close-modal">
+      <svg viewBox="0 0 100 100" class="icon-inv">
+        <path d="M0,0 L100,100 M0,100 L100,0"></path>
+      </svg>
+    </button>
+  </header>
+  <form method="dialog" id="orderForm" class="flex-stack">
+    <input type="text" name="name" placeholder="Ваше имя*" required autocomplete="name">
+    <input type="tel" name="phone" placeholder="Телефон*" required autocomplete="tel">
+    <input style="display:none" type="text" name="page" value={{ page.url }}>
+    <button class="alt" type="submit">Отправить</button>
+    </form>
+  {% include 'partials/form-state.liquid' %}
+</dialog>
+
+<dialog id="questionDialog" class="stack">
+  <header>
+    <h3>Задать вопрос</h3>
+    <button type="button" class="close-modal">
+      <svg viewBox="0 0 100 100" class="icon-inv">
+        <path d="M0,0 L100,100 M0,100 L100,0"></path>
+      </svg>
+    </button>
+  </header>
+  <form method="dialog" id="questionForm" class="flex-stack">
+    <input type="text" class="name" name="name" placeholder="Ваше имя*" required autocomplete="name">
+    <input type="email" class="email" name="email" placeholder="E-mail*" required autocomplete="email">
+    <textarea rows="4" name="message" class="message" placeholder="Ваше сообщение"></textarea>
+    <input style="display:none" type="text" name="page" value={{ page.url }}>
+    <button class="alt" type="submit">Отправить</button>
+    </form>
+  {% include 'partials/form-state.liquid' %}
+</dialog>

@@ -1,0 +1,35 @@
+---
+layout: "layouts/base.liquid"
+navOptions:
+  allowMissing: true
+---
+{% include 'partials/header.liquid' %}
+{% include 'partials/nav.liquid' %}
+<main class="stack post">
+  {%- unless nobc -%}
+  {% include 'partials/breadcrumbs.liquid' %}
+  {%- endunless -%}
+  <section class="popout color-primary">
+    <h1>{{title}}</h1>
+  </section>
+  <div class="post-meta color2">
+    <span>Автор: <a href="/o-nas/">{{config.authorName}}</a></span>
+    <time datetime="{{page.date | dateHTML}}">{{page.date | dateLocal}}</time>
+    {% if photos_by %}
+    <span>Фотограф: {{photos_by}}</span>
+    {% endif %}
+  </div>
+  <div class="popout post-image-container">
+    {% assign imgFileName = "/img/zhurnal/" | append: page.fileSlug | append: "-01" | imageExist %}
+    {% unless imgFileName %}
+    {% assign imgFileName = "/img/placeholder.jpg" %}
+    {% endunless %}
+    <img src="{{ imgFileName }}" alt="{{ title }}-фото-1" loading="eager" fetchpriority="high" sizes="(min-width: 2310px) 1000px, (min-width: 800px) 900px, 95vw" style="view-transition-name: {{title | slugify | append: "-img"}}">
+  </div>
+  {{content}}
+</main>
+{% if cta %}
+{% include 'partials/cta.liquid' title: cta.title, subtitle: cta.subtitle %}
+{% endif %}
+{% include 'partials/footer.liquid' %}
+{% include 'partials/svg-filters.liquid' %}

@@ -1,0 +1,32 @@
+#pagination ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em 1ch;
+  justify-content: space-between;
+  margin-block-start: var(--space-m-xl);
+  color: var(--color-text-10);
+  align-items: center;
+
+  >li>a[aria-current],
+  [inert] {
+    pointer-events: none;
+    color: var(--color-back-30);
+  }
+
+  .button {
+    padding-inline: 1em;
+    box-shadow: none;
+    block-size: var(--space-xl-2xl);
+  }
+
+  svg {
+    height: 1em;
+    stroke: currentColor;
+    stroke-width: .4em;
+    stroke-linecap: round;
+  }
+
+  >li:last-child svg {
+    transform: rotate(180deg);
+  }
+}

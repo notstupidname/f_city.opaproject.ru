@@ -1,0 +1,12 @@
+{% if service.price %}
+<section class="service-price color2">
+  <div>
+    <h2>Стоимость:</h2>
+    <p>{{ service.price }}</p>
+  </div>
+  <div>
+    <button id="openOrderDialogBtn" class="alt">Заказать</button>
+    <button id="openQuestionDialogBtn">Задать вопрос</button>
+  </div>
+</section>
+{% endif %}

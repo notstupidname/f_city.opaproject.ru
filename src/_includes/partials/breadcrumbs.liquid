@@ -1,0 +1,32 @@
+{% assign navPages = collections.all | eleventyNavigationBreadcrumb: eleventyNavigation.key %}
+
+<script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+    {%- for entry in navPages -%}
+      {%- if forloop.index == 1 -%}
+        {%- continue -%}
+      {%- endif -%}
+      {"@type": "ListItem",
+      "position": {{ forloop.index |minus: 1 }},
+      "name": "{{ entry.title }}",
+      "item": "{{ entry.url | toAbsoluteUrl}}"
+      },
+    {%- endfor -%}
+      {"@type": "ListItem",
+        "position": {{ navPages.length }},
+        "name": "{{ eleventyNavigation.title }}"
+      }]
+  }
+</script>
+
+<ul class="breadcrumbs">
+  {%- for entry in navPages %}
+    <li>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+    </li>
+  {%- endfor %}
+  <li>{{eleventyNavigation.title | truncate: 20}}</li>
+</ul>

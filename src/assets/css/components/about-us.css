@@ -1,0 +1,33 @@
+.about-us {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+  align-items: start;
+
+  >:first-child {
+    flex: 3 35ch;
+  }
+
+  >:not(:first-child) {
+    flex: 1 30ch;
+  }
+}
+
+.ext-link {
+  color: var(--color-primary);
+  transition: text-decoration-color var(--duration) var(--easing);
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 0.1em;
+  text-decoration-line: underline;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5ch;
+
+
+  &:hover {
+    text-decoration-color: transparent;
+  }
+}

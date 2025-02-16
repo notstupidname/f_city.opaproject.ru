@@ -1,0 +1,36 @@
+svg.icon {
+  height: 1em;
+  fill: currentColor;
+  stroke: none;
+}
+
+svg.icon-inv {
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+}
+
+svg.drawing {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  max-height: 85vh;
+  width: 100%;
+  margin-inline: auto;
+}
+
+svg.pic {
+  stroke: none;
+}
+
+svg.pic>:first-child {
+  fill: transparent;
+}
+
+svg.pic>:not(:first-child) {
+  fill: currentColor;
+}
+
+svg text {
+  stroke: none;
+}

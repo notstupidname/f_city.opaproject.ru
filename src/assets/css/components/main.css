@@ -1,0 +1,144 @@
+main {
+  /* background-color: darkkhaki; */
+  --content: min(var(--column-width), 100%);
+  --full: minmax(0, 1fr);
+  --main-gap: minmax(0, var(--gap));
+  --feature: minmax(0, 22ch);
+  --popout: minmax(0, var(--space-s-l));
+  grid-column: 3/4;
+  display: grid;
+  grid-template-columns: [full-start] var(--main-gap) [max-start] var(--full) [feature-start] var(--feature) [popout-start] var(--popout) [content-start] var(--content) [content-end] var(--popout) [popout-end] var(--feature) [feature-end] var(--full) var(--main-gap) [max-end full-end];
+  grid-auto-rows: min-content;
+}
+
+main>* {
+  grid-column: content;
+}
+
+
+
+main *:where(.color1, .color2, .color3, .color-primary) {
+  padding: var(--space-m-l) var(--space-s-l);
+  border-radius: var(--border-radius);
+  /* box-shadow: inset 0 0 2px 0 var(--text-color2); */
+  overflow-x: hidden;
+}
+
+main>.feature {
+  grid-column: feature;
+}
+
+main>.popout {
+  grid-column: popout;
+}
+
+main>.max {
+  grid-column: max;
+}
+
+main>.full {
+  grid-column: full;
+}
+
+main .color1 {
+  --section-color: var(--color-back);
+}
+
+main .color2 {
+  --section-color: var(--color-back-5);
+}
+
+main .color3 {
+  --section-color: var(--color-back-10);
+}
+
+main .color4 {
+  --section-color: var(--color-back-15);
+}
+
+.color-primary {
+  --col1: color-mix(in oklab, var(--color-primary-30) 15%, var(--color-back-10)10%);
+  --col2: color-mix(in oklab, var(--color-primary-30) 35%, var(--color-back-10)10%);
+  background: linear-gradient(45deg, var(--col1), var(--col2));
+}
+
+/* main>*+* {
+  margin-block-start: calc(var(--lh) * 1em);
+} */
+
+main>section:where(:not(:first-child)) {
+  margin-block: var(--space-xl-2xl) 0;
+}
+
+main h2+section {
+  margin-block-start: var(--space-m-l);
+}
+
+main p+section {
+  margin-block-start: var(--space-l-xl);
+}
+
+main>section.small {
+  margin-block: var(--space-m-l) 0;
+}
+
+main section,
+main div {
+  background-color: var(--section-color);
+}
+
+main section.flex-stack>:last-child {
+  margin-block-start: auto;
+}
+
+
+@media screen and (max-width: 1200px) {
+  main>.max {
+    grid-column: full-start/full-end;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+
+  main:has(.breadcrumbs) {
+    margin-block-start: -2em;
+  }
+}
+
+/* @media screen and (max-width: 780px) {
+  :where(.feature, .max) {
+    padding-inline: 0;
+    padding-block: calc(var(--space-m) - var(--gap));
+    border-radius: 0;
+    box-shadow: 0 0 0 var(--gap) var(--section-color);
+  }
+} */
+
+.two-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+.two-columns>:first-child {
+  flex: 1 25ch;
+}
+
+/* .two-columns.small>:first-child {
+  flex: 1 15ch;
+  max-block-size: 35vh;
+} */
+
+.two-columns>:not(:first-child) {
+  flex: 3 40ch;
+}
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+  gap: 1lh;
+  border-radius: var(--border-radius);
+  padding: var(--space-m-l) var(--space-s-m);
+  border: solid 2px var(--back-color4);
+  grid-column: popout;
+}

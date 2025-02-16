@@ -1,0 +1,146 @@
+#site-header {
+  /* background-color: aqua; */
+  position: sticky;
+  top: 0;
+  display: flex;
+  padding-block: var(--gap);
+  justify-content: start;
+  align-items: center;
+  /* gap: var(--gap); */
+  height: calc(var(--space-xl) + 2* var(--gap));
+  z-index: 100;
+  pointer-events: none;
+
+  /* view-transition-name: header; */
+}
+
+#site-header>* {
+  pointer-events: all;
+}
+
+#site-header a.logo {
+
+  font-size: var(--step-3);
+  /* view-transition-name: main-logo; */
+
+}
+
+#site-header a.logo span:nth-child(2) {
+  transition: transform var(--duration) var(--easing);
+  display: inline-block;
+}
+
+#site-header a.logo:hover span:nth-child(2) {
+  transform: scale(.85);
+}
+
+#site-header a.logo:active span:nth-child(2) {
+  transform: scale(1.25);
+}
+
+
+#site-header svg.icon {
+  height: 100%;
+  aspect-ratio: 1;
+  grid-area: 1/1;
+  transition: all var(--duration) var(--easing);
+}
+
+:where(#menu-toggle, #contact-toggle) {
+  /* position: absolute;
+  left: -9999px; */
+  display: none;
+}
+
+#site-header label:hover svg {
+  opacity: 0.85;
+}
+
+#site-header label,
+#site-header a.icon {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  aspect-ratio: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--color-text-20);
+}
+
+@media screen and (min-width: 1200px) {
+  #site-header label.menu-label {
+    display: none;
+  }
+}
+
+#menu-toggle:checked~nav {
+  transform: translateX(0);
+}
+
+#menu-toggle:checked+#site-header label.menu-label svg path.p1,
+#menu-toggle:checked+#site-header label.menu-label svg path.p2,
+#menu-toggle:checked+#site-header label.menu-label svg path.p3 {
+  transition: d var(--duration) var(--easing);
+}
+
+#menu-toggle:checked+#site-header label.menu-label svg path.p1 {
+  d: path("M20,80 L80,20");
+}
+
+#menu-toggle:checked+#site-header label.menu-label svg path.p2 {
+  d: path("M50,50 L50,50");
+}
+
+#menu-toggle:checked+#site-header label.menu-label svg path.p3 {
+  d: path("M20,20 L80,80");
+}
+
+#site-header .icon path {
+  stroke: currentcolor;
+  stroke-width: .5em;
+  stroke-linecap: round;
+  transition: all var(--duration) var(--easing);
+}
+
+#site-header .cross {
+  transform: scale(0);
+  color: var(--color-text-30);
+}
+
+body:has(#menu-toggle:checked) {
+  overflow: hidden;
+}
+
+@supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+
+  /* Safari-specific styles */
+
+  #site-header.icon {
+    transition: all var(--duration) var(--easing);
+  }
+
+  #menu-toggle:checked+#site-header .hamburger {
+    transform: scale(0);
+    color: var(--color-text-30);
+  }
+
+  #menu-toggle:checked+#site-header .cross {
+    transform: scale(1);
+    color: var(--color-text-20);
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+  #site-header {
+    grid-column: 1/5;
+    padding-inline: var(--gap);
+    background: var(--color-back);
+    z-index: 100;
+    /* margin-block-end: 1rem; */
+    /* height: calc(var(--space-l) + 2* var(--gap)); */
+    pointer-events: all;
+  }
+
+}

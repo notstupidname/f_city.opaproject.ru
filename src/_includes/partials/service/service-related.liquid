@@ -1,0 +1,22 @@
+{% if related %}
+<h2>Смотрите также:</h2>
+<section class="popout no-sda">
+  <div class="items small">
+  {% for item in related %}
+    {% assign service = collections.services | where: "data.eleventyNavigation.key", item %}
+    {% if service[0] %}
+    <div class="item {% if service[0].data.service.color == "color-primary" %}color-primary{% else %}color2{% endif %} stack">
+      <img src="/img/ui/{{item}}.jpg" alt="{{service[0].data.service.title}}" sizes="(min-width: 2060px) calc(1.91vw + 180px), (min-width: 840px) calc(2.58vw + 165px), (min-width: 680px) calc(24.29vw - 14px), (min-width: 460px) calc(50vw - 79px), calc(100vw - 89px)">
+      <h3>{{service[0].data.service.title}}</h3>
+      {% if service[0].data.service.description_item %}
+      <p>{{service[0].data.service.description_item}}</p>
+      {% else %}
+      <p>{{service[0].data.service.description_short}}</p>
+      {% endif %}
+      <a href="{{service[0].url}}" class="button small {% if service[0].data.service.color == "color-primary" %}alt{% endif %}">Подробнее</a>
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+</section>
+{% endif %}

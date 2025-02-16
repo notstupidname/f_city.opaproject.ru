@@ -1,0 +1,21 @@
+<section class="{{ item.data.service.color }} popout card-service stack scale-reveal">
+  <div class="card-service-content">
+    <div class="stack">
+      <h3>{{item.data.service.title}}</h3>
+      <p>{{item.data.service.description_short}}</p>
+      <p class="subscript text-light">{{item.data.service.description_for}}</p>
+    </div>
+    <section class="stack color1">
+      <h4>Что входит:</h4>
+      <ul>
+        {% for feature in item.data.service.features %}
+          <li>{{feature}}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+  <div class="card-servive-footer">
+    <p class="card-servive-price">{{item.data.service.price}}</p>
+    <a href="{{item.url}}" class="button{% if item.data.service.color == "color-primary" %} alt {% endif %}">Подробнее</a>
+  </div>
+</section>

@@ -1,0 +1,5 @@
+<svg viewBox="0 0 100 100" class="hamburger icon">
+    <path d="M80,25 L10,25" class="p1"/>
+    <path d="M10,50 L80,50" class="p2"/>
+    <path d="M80,75 L10,75" class="p3"/>
+</svg>

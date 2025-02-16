@@ -1,0 +1,22 @@
+{% assign sorted_array = collections.featured | sort: 'data.featured' %}
+{% for post in sorted_array %}
+<section class="popout {% if post.data.tags contains 'project' %}color-primary{% else %}color2{% endif %} two-columns small">
+  {% assign imgFileName = "/img/zhurnal/" | append: post.page.fileSlug | append: "-01" | imageExist %}
+  {% unless imgFileName %}
+  {% assign imgFileName = "/img/placeholder.jpg" %}
+  {% endunless %}
+  <img src="{{ imgFileName }}" alt="{{ post.data.title }}-фото-1" style="view-transition-name: {{post.data.title | slugify | append: '-img'}}" sizes="(min-width: 740px) calc(2.65vw + 224px), calc(100vw - 75px)">
+  <div class="stack">
+    <h3>{{ post.data.title }}</h3>
+    {% if post.data.excerpt %}
+      {% assign excerpt = post.data.excerpt %}
+    {% elsif post.page.excerpt %}
+      {% assign excerpt = post.page.excerpt %}
+    {% else %}
+      {% assign excerpt = post.content | truncatewords: 25 %}
+    {% endif %}
+    <p>{{excerpt}}</p>
+    <a href="{{ post.url }}" class="button small {% if post.data.tags contains 'project' %}alt{% endif %}">Читать далее</a>
+  </div>
+</section>
+{% endfor %}

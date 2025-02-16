@@ -1,0 +1,15 @@
+{% if service.contains_title and service.contains %}
+<section class="service-contains popout">
+  <section style="view-transition-name: {{page.url| split: '/'| last}}-contain" class="color2 stack">
+    <h2>{{ service.contains_title }}:</h2>
+    <ul>
+      {% for item in service.contains %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  <section class="color1 reveal">
+    <p class="text-light">{{ service.for_whom }}</p>
+  </section>
+</section>
+{% endif %}

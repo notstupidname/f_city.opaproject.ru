@@ -1,0 +1,22 @@
+{% unless title %}
+    {% assign title = config.defaultTitle %}
+{% else %}
+    {% unless title contains config.name %}
+        {% assign title = title |append: ' - ' |append: config.name %}
+    {% endunless %}
+{% endunless %}
+
+{% assign description = description | default: config.defaultDescription %}
+
+{% assign image = image | default: config.defaultImage %}
+
+
+<!doctype html>
+<html lang="{{ config.lang }}">
+    <head>
+        {% include 'partials/head.liquid' %}
+    </head>
+    <body>
+        {{ content }}
+    </body>
+</html>

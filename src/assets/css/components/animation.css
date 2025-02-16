@@ -1,0 +1,119 @@
+@keyframes border-reveal {
+  from {
+    border-color: var(--color-border);
+  }
+
+  50% {
+    border-color: var(--color-primary);
+  }
+
+  to {
+    border-color: var(--color-border);
+  }
+}
+
+@keyframes main-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes scale-reveal {
+  from {
+    transform: scale(.85);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+
+
+.border {
+  border: solid 2px var(--color-back-10);
+  /* Create View Timeline */
+  /* view-timeline-name: --revealing-border;
+  view-timeline-axis: block; */
+
+  /* Attach animation, linked to the  View Timeline */
+  animation: linear border-reveal both;
+  /* animation-timeline: --revealing-border; */
+
+  /* Tweak range when effect should run*/
+  animation-range: entry 75% exit;
+}
+
+section.border {
+  animation-timeline: view();
+
+}
+
+#site-footer {
+  animation: linear main-reveal both;
+  animation-range: entry;
+}
+
+#cta {
+  animation: linear main-reveal both, linear scale-reveal both;
+  animation-range: entry, entry;
+}
+
+.reveal {
+  animation: linear main-reveal both;
+  animation-range: entry entry 25vh;
+}
+
+.scale-reveal {
+  animation: linear main-reveal both, linear scale-reveal both;
+  animation-range: entry entry 25vh;
+}
+
+/* main>* {
+  animation: linear main-reveal both;
+  animation-range: entry 20% cover 50%;
+}
+
+main>section,
+#cta {
+  animation: linear main-reveal both, linear scale-reveal both;
+  animation-range: entry, entry;
+} */
+
+#cta,
+#site-footer {
+  animation-timeline: view();
+}
+
+.no-sda {
+  animation: none;
+}
+
+.slide {
+  animation: linear main-reveal both;
+  animation-range: cover cover 50%;
+}
+
+@keyframes img-appear {
+  from {
+    scale: .9;
+  }
+}
+
+.slide picture {
+  overflow: clip;
+
+  img {
+    animation: linear img-appear both;
+    animation-range: cover cover 50%;
+  }
+}
+
+.slide>picture>img {
+  animation-timeline: view(inline);
+}

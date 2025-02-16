@@ -1,0 +1,49 @@
+{% comment %} <nav>
+  {% assign navPages = collections.menu | eleventyNavigation: 'index' %}
+  <ul>
+  {%- for entry in navPages %}
+  <li{% if entry.url == page.url %} class="current"{% endif %}>
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+    {%- if entry.children.length > 0 -%}
+    <ul{% if page.url contains entry.url %} class="open"{% endif %}>
+      {%- for child in entry.children %}
+      <li{% if page.url contains child.url %} class="current"{% endif %}>
+        <a href="{{ child.url }}">{{ child.title }}</a>
+      </li>
+      {% endfor -%}
+    </ul>
+    {%- endif -%}
+  </li>
+  {%- endfor %}
+  </ul>
+</nav> {% endcomment %}
+<nav>
+  <div>
+    <header>
+      <a class="nav-tab current" href="#concept-nav">Концепт</a>
+      <a class="nav-tab{% unless makeProject == true %} disabled {% endunless %}" href="#project-nav">Проект</a>
+    </header>
+    <section class="scroller">
+      <ul id="concept-nav">
+        {% for room in concept %}
+        <li><a href="#concept-{{forloop.index}}">{{room.name}}</a></li>
+        {% endfor %}
+      </ul>
+      {% if makeProject == true %}
+      <ul id="project-nav">
+        {% for subcat in project %}
+        {% if subcat[1].items.length > 0 %}
+        <li><a href="#project-{{subcat[0]}}">{{ subcat[1].title }}</a></li>
+        {% endif %}
+        {% endfor %}
+        <li>
+          <a class="download" href="/files/ВАНГАРДЕН_проект.pdf" target="_blank">
+            <span>Чертежи</span>
+            {% include "svg-icons/file_download.svg" %}
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+  {% endif %}
+</nav>

@@ -1,0 +1,19 @@
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+}
+
+.contacts>:first-child {
+  flex: 1 32ch;
+  block-size: fit-content;
+}
+
+.contacts>:not(:first-child) {
+  flex: 2 35ch;
+}
+
+
+.contacts-list a {
+  inline-size: 100%;
+}

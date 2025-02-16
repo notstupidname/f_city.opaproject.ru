@@ -1,0 +1,27 @@
+.logo {
+  font-family: 'Shantell-Sans-opa', cursive;
+  font-weight: 500;
+  letter-spacing: -0.1ch;
+
+  & span:first-child {
+    letter-spacing: 0.1ch;
+    color: var(--color-back-10);
+  }
+
+  & span:nth-child(3) {
+    color: transparent;
+    background-image: linear-gradient(30deg, var(--color-primary), var(--color-primary-30));
+    background-clip: text;
+    padding-inline-end: .2ch;
+  }
+
+  & span:nth-child(4) {
+    color: var(--color-text-10);
+    font-family: 'Roboto-Slab', 'Roboto-Slab-fallback', serif;
+    font-size: var(--step-2);
+    font-weight: var(--font-weight);
+    letter-spacing: normal;
+    text-transform: lowercase;
+  }
+
+}

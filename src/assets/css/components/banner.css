@@ -1,0 +1,55 @@
+.banner {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 0;
+  padding: var(--space-m-xl);
+  gap: var(--space-l) var(--space-s);
+  flex-wrap: wrap-reverse;
+
+  >*:first-child {
+    flex: 5 1 28ch;
+  }
+
+  >*:last-child {
+    flex: 1 1 29ch;
+
+  }
+
+  h1 span:first-child {
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(90deg, var(--color-text-15), var(--color-text-25), var(--color-text-15));
+    /* white-space: nowrap; */
+  }
+
+  h1 span:last-child {
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(90deg, var(--color-primary), var(--color-primary-30), var(--color-primary));
+    font-size: calc(var(--step-3) + 10%);
+    font-weight: calc(var(--font-weight-semibold) + 100);
+  }
+
+  @media screen and (min-width: 500px) {
+    h1 span:first-child {
+      white-space: nowrap;
+    }
+  }
+
+  picture {
+    border-image: linear-gradient(to right, var(--color-primary), var(--color-primary-30)) 1;
+    border-width: var(--space-s-m);
+    border-style: solid;
+    border-image-repeat: space;
+  }
+
+  picture img {
+    mix-blend-mode: exclusion;
+  }
+
+  .subscript {
+    font-size: var(--step--1);
+  }
+}

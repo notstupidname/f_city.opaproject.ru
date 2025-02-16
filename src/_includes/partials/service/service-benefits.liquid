@@ -1,0 +1,13 @@
+{% if service.benefits %}
+<section class="stack">
+  <h2>Почему это удобно:</h2>
+  <div class="items small">
+    {% for item in service.benefits %}
+    <div class="item color2 stack">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.text }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

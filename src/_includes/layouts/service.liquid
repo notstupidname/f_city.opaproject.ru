@@ -1,0 +1,15 @@
+---
+layout: "layouts/generic.liquid"
+
+---
+<section class="popout color-primary">
+  <h1>{{ service.title }}</h1>
+</section>
+{{intro}}
+{% include 'partials/service/service-contains.liquid' service: service %}
+{% include 'partials/service/service-price.liquid' service: service %}
+{{content}}
+{% include 'partials/service/service-benefits.liquid' service: service %}
+{% include 'partials/faq.liquid' faq: faq %}
+{% include 'partials/service/service-related.liquid' %}
+{% include 'partials/dialog.liquid' %}

@@ -1,0 +1,5 @@
+ul.list {
+  list-style: disc;
+  padding-inline-start: 2ch;
+  font-weight: var(--font-weight-light);
+}

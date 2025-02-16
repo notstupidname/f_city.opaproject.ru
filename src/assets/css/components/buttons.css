@@ -1,0 +1,88 @@
+/* Buttons */
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button) {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xs) 2ch;
+  white-space: nowrap;
+  /* font-weight: var(--font-weight-semibold); */
+  font-size: var(--step-1);
+  background-color: var(--color-back-5);
+  color: inherit;
+  box-shadow: inset 0 0 1px 1px var(--color-back-30);
+  border-radius: var(--border-radius);
+  gap: 1ch;
+
+  width: fit-content;
+  height: fit-content;
+
+  transition: background-color var(--duration) var(--easing);
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button) span {
+  letter-spacing: normal;
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button).small {
+  font-size: unset;
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button).alt {
+  background-color: var(--color-primary-30);
+  box-shadow: none;
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button):where(:not(:active):hover) {
+  background-color: var(--color-back-10);
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button).alt:where(:not(:active):hover) {
+  background-color: var(--color-primary-20);
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button):active {
+  background-color: var(--color-back-15);
+}
+
+:where(button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button).alt:active {
+  background-color: var(--color-primary-10);
+}

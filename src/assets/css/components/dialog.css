@@ -1,0 +1,71 @@
+dialog {
+  --max-width: calc(100vw - 2*var(--gap));
+  inline-size: min(50ch, var(--max-width));
+  border-radius: var(--border-radius);
+  background: var(--color-back-10);
+  margin: auto;
+  border: none;
+  box-shadow: inset 0 0 1px 1px var(--color-back-30);
+
+  & header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & button.close-modal {
+      stroke-width: .45em;
+      stroke-linecap: round;
+      color: var(--color-text-10);
+      padding: var(--space-xs);
+      box-shadow: none;
+      background-color: var(--color-back-10);
+
+      &:hover {
+        background-color: var(--color-back-20);
+      }
+    }
+
+  }
+
+  &,
+  &::backdrop {
+    transition:
+      display var(--duration) allow-discrete,
+      overlay var(--duration) allow-discrete,
+      opacity var(--duration),
+      transform var(--duration);
+    opacity: 0;
+    transition-timing-function: var(--easing);
+  }
+
+  /* ON STAGE */
+  &[open] {
+    opacity: 1;
+
+    &::backdrop {
+      opacity: 1;
+    }
+  }
+
+  /* OFF STAGE */
+  @starting-style {
+
+    &[open],
+    &[open]::backdrop {
+      opacity: 0;
+    }
+
+    &[open] {
+      transform: translateY(100px);
+    }
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(5px) brightness(.25);
+  }
+
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}

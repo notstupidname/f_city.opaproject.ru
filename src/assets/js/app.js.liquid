@@ -1,0 +1,7 @@
+---
+permalink: assets/js/app.min.js
+---
+{%- capture js -%}
+    {%- include './app.js' -%}
+{%- endcapture -%}
+{{ js | jsmin }}

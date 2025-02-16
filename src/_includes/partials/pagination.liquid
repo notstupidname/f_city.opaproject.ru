@@ -1,0 +1,50 @@
+{%- for pageEntry in pagination.pages -%}
+  {%- if page.url == pagination.hrefs[ forloop.index0 ] -%}
+    {%- assign currentPageIndex = forloop.index -%}
+  {% endif %}
+{%- endfor -%}
+{%- assign paginationLength = pagination.pages.length -%}
+<div id="pagination">
+  <ol>
+    <li {% unless pagination.href.previous %} inert class="button"{% endunless %}>{% if pagination.href.previous %}<a class="button" href="{{ pagination.href.previous }}">{% include 'svg-icons/arrow.svg' %}</a>{% else %}{% include 'svg-icons/arrow.svg' %}{% endif %}</li>
+    {%- if paginationLength == 1 -%}
+      <li><a class="button" href="{{ pagination.hrefs[0] }}"{% if page.url == pagination.hrefs[0] %} aria-current="page"{% endif %}>{{ 1 }}</a></li>
+    {%- elsif paginationLength == 2 -%}
+      <li><a class="button" href="{{ pagination.hrefs[0] }}"{% if page.url == pagination.hrefs[0] %} aria-current="page"{% endif %}>{{ 1 }}</a></li>
+      <li><a class="button" href="{{ pagination.hrefs[1] }}"{% if page.url == pagination.hrefs[1] %} aria-current="page"{% endif %}>{{ 2 }}</a></li>
+    {%- else -%}
+      {% assign len1 = paginationLength | minus: 1 %}
+      {% assign len2 = paginationLength | minus: 2 %}
+      {%- if currentPageIndex == paginationLength -%}
+      {% assign pi0 = currentPageIndex | minus: 1 %}
+      {% assign pi1 = currentPageIndex | minus: 2 %}
+      {% assign pi2 = currentPageIndex | minus: 3 %}
+        <li><a class="button" href="{{ pagination.hrefs[pi2] }}"{% if page.url == pagination.hrefs[pi2] %} aria-current="page"{% endif %}>{{ pi2 | plus: 1 }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi1] }}"{% if page.url == pagination.hrefs[pi1] %} aria-current="page"{% endif %}>{{ pi1 | plus: 1 }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[currentPageIndex] }}"{% if page.url == pagination.hrefs[pi0] %} aria-current="page"{% endif %}>{{ currentPageIndex }}</a></li>
+      {%- elsif currentPageIndex == len1 -%}
+        {% assign pi0 = currentPageIndex | minus: 1 %}
+        {% assign pi1 = currentPageIndex | minus: 2 %}
+        {% assign pi2 = currentPageIndex %}
+        <li><a class="button" href="{{ pagination.hrefs[pi1] }}"{% if page.url == pagination.hrefs[pi1] %} aria-current="page"{% endif %}>{{ pi1 | plus: 1 }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[currentPageIndex] }}"{% if page.url == pagination.hrefs[pi0] %} aria-current="page"{% endif %}>{{ currentPageIndex }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi2] }}"{% if page.url == pagination.hrefs[pi2] %} aria-current="page"{% endif %}>{{ pi2 | plus: 1 }}</a></li>
+      {%- elsif currentPageIndex == len2 -%}
+        {% assign pi0 = currentPageIndex | minus: 1 %}
+        {% assign pi1 = currentPageIndex %}
+        {% assign pi2 = currentPageIndex | plus: 1 %}
+        <li><a class="button" href="{{ pagination.hrefs[currentPageIndex] }}"{% if page.url == pagination.hrefs[pi0] %} aria-current="page"{% endif %}>{{ currentPageIndex }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi1] }}"{% if page.url == pagination.hrefs[pi1] %} aria-current="page"{% endif %}>{{ pi1 | plus: 1 }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi2] }}"{% if page.url == pagination.hrefs[pi2] %} aria-current="page"{% endif %}>{{ pi2 | plus: 1 }}</a></li>
+      {%- else -%}
+        {% assign pi0 = currentPageIndex | minus: 1 %}
+        {% assign pi1 = currentPageIndex %}
+        {% assign pi2 = currentPageIndex | plus: 1 %}
+        <li><a class="button" href="{{ pagination.hrefs[currentPageIndex] }}"{% if page.url == pagination.hrefs[pi0] %} aria-current="page"{% endif %}>{{ currentPageIndex }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi1] }}"{% if page.url == pagination.hrefs[pi1] %} aria-current="page"{% endif %}>{{ pi1 | plus: 1 }}</a></li>
+        <li><a class="button" href="{{ pagination.hrefs[pi2] }}"{% if page.url == pagination.hrefs[pi2] %} aria-current="page"{% endif %}>{{ pi2 | plus: 1 }}</a></li>
+      {%- endif -%}
+    {%- endif -%}
+    <li {% unless pagination.href.next %}inert class="button disabled"{% endunless %}>{% if pagination.href.next %}<a class="button" href="{{ pagination.href.next }}">{% include 'svg-icons/arrow.svg' %}</a>{% else %}{% include 'svg-icons/arrow.svg' %}{% endif %}</li>
+  </ol>
+</div>

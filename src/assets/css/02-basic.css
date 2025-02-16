@@ -1,0 +1,308 @@
+/* @font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/inter.var.subset.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 700;
+}
+
+@font-face {
+  font-family: "Inter-fallback";
+  font-display: swap;
+  size-adjust: 106.00%;
+  ascent-override: 90%;
+  advance-override: 1;
+  src: local("Arial");
+} */
+
+@font-face {
+  font-family: 'Shantell-Sans-opa';
+  src: url('/assets/fonts/ShantellSans-var.subset.opa.woff2') format('woff2');
+  font-display: block;
+  font-weight: 300 800;
+  font-variation-settings: 'INFM' 100;
+}
+
+@font-face {
+  font-family: 'Roboto-Slab';
+  src: url('/assets/fonts/roboto-slab.var.subset.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 700;
+}
+
+@font-face {
+  font-family: 'Roboto-Slab-fallback';
+  src: local(Georgia);
+  size-adjust: 103%;
+  ascent-override: 98%;
+  descent-override: 25%;
+  line-gap-override: normal;
+}
+
+/* @view-transition {
+  navigation: auto;
+} */
+
+html {
+  color-scheme: light dark;
+}
+
+/* Light */
+:root {
+  interpolate-size: allow-keywords;
+  /* Color scheme */
+
+  --brand-hue: 16;
+  --brand-saturation: 69%;
+  --brand-lightness: 69%;
+
+  --color-primary: hsl(var(--brand-hue), var(--brand-saturation), var(--brand-lightness));
+
+  --color-text: hsl(var(--brand-hue), 20%, 15%);
+  --color-back: hsl(var(--brand-hue), 10%, 93%);
+  --color-border: hsl(var(--brand-hue), 10%, 83%);
+
+  /* Shades */
+  --color-primary-5: color-mix(in oklab, var(--color-primary), var(--color-back) 5%);
+  --color-primary-10: color-mix(in oklab, var(--color-primary), var(--color-back) 10%);
+  --color-primary-15: color-mix(in oklab, var(--color-primary), var(--color-back) 15%);
+  --color-primary-20: color-mix(in oklab, var(--color-primary), var(--color-back) 20%);
+  --color-primary-25: color-mix(in oklab, var(--color-primary), var(--color-back) 25%);
+  --color-primary-30: color-mix(in oklab, var(--color-primary), var(--color-back) 30%);
+
+  --color-text-5: color-mix(in oklab, var(--color-text), var(--color-back) 5%);
+  --color-text-10: color-mix(in oklab, var(--color-text), var(--color-back) 10%);
+  --color-text-15: color-mix(in oklab, var(--color-text), var(--color-back) 15%);
+  --color-text-20: color-mix(in oklab, var(--color-text), var(--color-back) 20%);
+  --color-text-25: color-mix(in oklab, var(--color-text), var(--color-back) 25%);
+  --color-text-30: color-mix(in oklab, var(--color-text), var(--color-back) 30%);
+
+  --color-back-5: color-mix(in oklab, var(--color-back), var(--color-text) 5%);
+  --color-back-10: color-mix(in oklab, var(--color-back), var(--color-text) 10%);
+  --color-back-15: color-mix(in oklab, var(--color-back), var(--color-text) 15%);
+  --color-back-20: color-mix(in oklab, var(--color-back), var(--color-text) 20%);
+  --color-back-25: color-mix(in oklab, var(--color-back), var(--color-text) 25%);
+  --color-back-30: color-mix(in oklab, var(--color-back), var(--color-text) 30%);
+
+  --text-color2: color-mix(in oklab, var(--text-color) 60%, var(--back-color));
+  --back-color2: color-mix(in oklab, var(--back-color) 95%, var(--text-color));
+  --back-color3: color-mix(in oklab, var(--back-color) 85%, var(--text-color));
+
+  --accent-color: #e69679;
+  --accent-color2: color-mix(in oklab, var(--accent-color) 60%, var(--back-color));
+
+
+  /* Fonts */
+  --font-weight: 400;
+  --font-weight-light: 350;
+  --font-weight-medium: 450;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 700;
+
+  /* Misc */
+  --border-radius: var(--space-m);
+  --duration: .25s;
+  --easing: ease-in-out;
+}
+
+/* Dark */
+@media(prefers-color-scheme: dark) {
+
+  :root {
+    --brand-lightness: 31%;
+    --color-text: hsl(var(--brand-hue), 10%, 80%);
+    --color-back: hsl(var(--brand-hue), 5%, 10%);
+    --color-border: hsl(var(--brand-hue), 10%, 20%);
+    /* Fonts */
+    --font-weight: 350;
+    --font-weight-light: 250;
+    --font-weight-medium: 400;
+    --font-weight-semibold: 500;
+  }
+
+  img {
+    filter: brightness(.9) contrast(1.1) saturate(.9);
+  }
+}
+
+:root {
+  /* color: var(--text-color); */
+  fill: var(--color-text);
+  stroke: var(--color-text);
+  --column-width: 85ch;
+  --gap: var(--space-xs-s);
+  --lh: 1.6;
+  --lhh: 1.2;
+
+  /* Type Scale */
+  /* @link https://utopia.fyi/type/calculator?c=1280,17,1.25,2540,20,1.25,4,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|m-xl|xl-2xl|xs-l&g=s,l,xl,12 */
+  --step--1: clamp(0.85rem, 0.6976rem + 0.1905vi, 1rem);
+  --step-0: clamp(1.0625rem, 0.872rem + 0.2381vi, 1.25rem);
+  --step-1: clamp(1.3281rem, 1.09rem + 0.2976vi, 1.5625rem);
+  --step-2: clamp(1.6602rem, 1.3625rem + 0.372vi, 1.9531rem);
+  --step-3: clamp(2.0752rem, 1.7032rem + 0.465vi, 2.4414rem);
+  --step-4: clamp(2.594rem, 2.129rem + 0.5813vi, 3.0518rem);
+
+
+  /* @link https://utopia.fyi/space/calculator?c=1280,17,1.25,2540,20,1.25,4,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|m-xl|xl-2xl|xs-l&g=s,l,xl,12 */
+  --space-3xs: clamp(0.25rem, 0.1865rem + 0.0794vi, 0.3125rem);
+  --space-2xs: clamp(0.5625rem, 0.499rem + 0.0794vi, 0.625rem);
+  --space-xs: clamp(0.8125rem, 0.6855rem + 0.1587vi, 0.9375rem);
+  --space-s: clamp(1.0625rem, 0.872rem + 0.2381vi, 1.25rem);
+  --space-m: clamp(1.625rem, 1.371rem + 0.3175vi, 1.875rem);
+  --space-l: clamp(2.125rem, 1.744rem + 0.4762vi, 2.5rem);
+  --space-xl: clamp(3.1875rem, 2.6161rem + 0.7143vi, 3.75rem);
+  --space-2xl: clamp(4.25rem, 3.4881rem + 0.9524vi, 5rem);
+  --space-3xl: clamp(6.375rem, 5.2321rem + 1.4286vi, 7.5rem);
+
+  /* One-up pairs */
+  --space-3xs-2xs: clamp(0.25rem, -0.131rem + 0.4762vi, 0.625rem);
+  --space-2xs-xs: clamp(0.5625rem, 0.1815rem + 0.4762vi, 0.9375rem);
+  --space-xs-s: clamp(0.8125rem, 0.3681rem + 0.5556vi, 1.25rem);
+  --space-s-m: clamp(1.0625rem, 0.2371rem + 1.0317vi, 1.875rem);
+  --space-m-l: clamp(1.625rem, 0.7361rem + 1.1111vi, 2.5rem);
+  --space-l-xl: clamp(2.125rem, 0.4742rem + 2.0635vi, 3.75rem);
+  --space-xl-2xl: clamp(3.1875rem, 1.3462rem + 2.3016vi, 5rem);
+  --space-2xl-3xl: clamp(4.25rem, 0.9484rem + 4.127vi, 7.5rem);
+
+  /* Custom pairs */
+  --space-s-l: clamp(1.0625rem, -0.3978rem + 1.8254vi, 2.5rem);
+  --space-m-xl: clamp(1.625rem, -0.5337rem + 2.6984vi, 3.75rem);
+  --space-xl-2xl: clamp(3.1875rem, 1.3462rem + 2.3016vi, 5rem);
+  --space-xs-l: clamp(0.8125rem, -0.9018rem + 2.1429vi, 2.5rem);
+}
+
+::selection {
+  color: var(--color-back);
+  background: var(--color-text);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--color-text) var(--color-back);
+  background: var(--color-back);
+  color: var(--color-text);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-back);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-text);
+}
+
+svg {
+  fill: var(--color-text);
+  stroke: var(--color-text);
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+}
+
+body.is-loading *,
+body.is-loading *:before,
+body.is-loading *:after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Type */
+
+body,
+input,
+select,
+textarea {
+  line-height: var(--lh);
+  font-family: 'Roboto-Slab', 'Roboto-Slab-fallback', serif;
+  font-size: var(--step-0);
+  font-weight: var(--font-weight);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: var(--lhh);
+  font-weight: var(--font-weight-semibold);
+  /* letter-spacing: -0.025ch; */
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+}
+
+h4 {
+  font-size: var(--step-1);
+}
+
+/* p {
+  line-height: 1.6;
+} */
+
+b,
+strong {
+  font-weight: var(--font-weight-bold);
+}
+
+sup {
+  font-size: .7em;
+}
+
+hr {
+  border: 0;
+  margin: var(--gap) 0;
+}
+
+a:not([class]) {
+  transition: text-decoration-color var(--duration) var(--easing);
+  text-decoration-color: var(--color-text-10);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 0.1em;
+  text-decoration-line: underline;
+}
+
+a:not([class]):hover {
+  text-decoration-color: transparent;
+}
+
+:where(:not(:active)):focus-visible {
+  outline: dashed 2px var(--color-text-10);
+  outline-offset: 5px;
+}
+
+img {
+  border-radius: var(--border-radius);
+}
+
+.stack>*+* {
+  margin-top: calc(var(--lh) * 1em);
+}
+
+/* .stack>*+:where(h1, h2, h3, h4) {
+  margin-top: calc(var(--lhh) * 1em);
+} */
+
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}

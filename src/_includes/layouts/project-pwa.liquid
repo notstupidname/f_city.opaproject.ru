@@ -1,0 +1,113 @@
+{% unless title %}
+  {% assign title = config.defaultTitle %}
+{% endunless %}
+
+
+{%- assign description = description | default: config.defaultDescription  -%}
+{%- assign image = image | default: config.defaultImage -%}
+
+<!doctype html>
+<html lang="{{ config.lang }}">
+  <head>
+      {% include 'partials/head.liquid' %}
+  </head>
+  <body class="pwa">
+    {% include 'partials/header-pwa.liquid' %}
+    {% include 'partials/nav-pwa.liquid' %}
+    <main class="stack">
+      <section class="banner feature color2">
+        <model-viewer 
+          src="/models/vangarden-3.glb"
+          camera-controls
+          poster="/models/poster.png"
+          camera-orbit="0deg 25deg 22.35m"
+          field-of-view="30deg"
+          shadow-intensity="1"
+          shadow-softness="1"
+          environment-image="legacy"
+          exposure=".69"
+          tone-mapping="neutral"
+          ar-status="not-presenting">
+        </model-viewer>
+      </section>
+    {% for room in concept %}
+      <section id="concept-{{forloop.index}}" class="stack">
+        <h2>{{room.name}}</h2>
+        {% for pic in room.pics %}
+          <figure>
+            {% if pic.imgurl != "" %}
+            {% comment %} {% respImageURL pic.imgurl pic.title "100vw" %} {% endcomment %}
+            <img src="{{ pic.imgurl }}" alt="{{ pic.title }}">
+            {% else %}
+            {% include 'partials/img-placeholder.liquid' %}
+            {% endif %}
+            <figcaption>{{pic.title}}</figcaption>
+          </figure>
+        {% endfor %}
+        <div class="items">
+          {% for item in room.items %}
+          {% if item.url != "" %}
+          <a href="{{item.url}}" target="_blank">
+            <figure>
+              {% if item.imgurl != "" %}
+              {% comment %} {% respImageURL item.imgurl item.title "45ch" %} {% endcomment %}
+               <img src="{{ item.imgurl }}" alt="{{ item.title }}">
+              {% else %}
+              {% include 'partials/img-placeholder.liquid' %}
+              {% endif %}
+              <figcaption>{{item.title}}</figcaption>
+            </figure>
+          </a>
+          {% else %}
+          <figure>
+            {% if item.imgurl != "" %}
+              <img src="{{ item.imgurl }}" alt="{{ item.title }}">
+            {% else %}
+            {% include 'partials/img-placeholder.liquid' %}
+            {% endif %}
+            <figcaption>{{item.title}}</figcaption>
+          </figure>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+
+      {% if makeProject %}
+      {% for subcat in project %}
+      {% if subcat[1].items.length > 0 %}
+      <section id="project-{{subcat[0]}}" class="stack">
+        <h2>{{ subcat[1].title }}</h2>
+        {% for item in subcat[1].items %}
+          <div class="card">
+            {% if item.url != "" %}
+            <a href="{{item.url}}" target="_blank">
+              {% if item.imgurl != "" %}
+                <img src="{{ item.imgurl }}" alt="{{ item.title }}">
+              {% else %}
+              {% include 'partials/img-placeholder.liquid' %}
+              {% endif %}
+            </a>
+            {% else %}
+            {% if item.imgurl != "" %}
+              <img src="{{ item.imgurl }}" alt="{{ item.title }}">
+            {% else %}
+            {% include 'partials/img-placeholder.liquid' %}
+            {% endif %}
+            {% endif %}
+            <div class="card-text">
+              <p>{{item.title}}</p>
+              <p>{{item.details}}</p>
+            </div>
+            <p>{{item.count | append: " "}}{% if item.edizm != "" %}{{item.edizm}}{% else %}шт{% endif %}</p>
+          </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </main>
+    {% include 'partials/footer.liquid' %}
+    <script type="module" src="/assets/js/model-viewer.min.js"></script>
+  </body>
+</html>

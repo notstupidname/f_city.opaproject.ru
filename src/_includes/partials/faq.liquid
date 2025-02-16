@@ -1,0 +1,30 @@
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faq %}
+    {
+    "@type": "Question",
+    "name": "{{ item.q |  escape}}",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "{{ item.a | strip_html | escape}}"
+      }
+    }{%unless forloop.last%},{%endunless%}
+    {% endfor %}
+    ]
+}
+</script>
+<h2>F.A.Q.</h2>
+{% if faq_subtitle %}<p>{{faq_subtitle}}</p>{% endif %}
+<section class="color2 popout">
+  {% for item in faq %}
+  <details class="stack">
+    <summary>{{ item.q }}</summary>
+    <p>{{ item.a }}</p>
+  </details>
+  {% endfor %}
+</section>
+{% endif %}

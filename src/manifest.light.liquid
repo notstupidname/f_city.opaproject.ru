@@ -1,0 +1,17 @@
+---
+permalink: manifest.light.webmanifest
+layout: null
+eleventyExcludeFromCollections: true
+---
+{
+"name": "{{ config.name }}",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180", "purpose": "maskable" }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "{{config.metaThemeColorLight}}",
+  "theme_color": "{{config.metaThemeColorLight}}"
+}

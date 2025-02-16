@@ -1,0 +1,108 @@
+nav {
+  /* background-color: burlywood; */
+  --navtop: calc(var(--space-xl) + 2 * var(--gap));
+  grid-column: 2/3;
+  grid-row: span 2;
+  position: sticky;
+  top: var(--navtop);
+  align-self: start;
+  height: calc(100vh - var(--navtop));
+  height: calc(100dvh - var(--navtop));
+  /* font-weight: var(--font-weight-semibold); */
+  display: flex;
+  place-items: start;
+  /* display: grid;
+  grid-template-columns: 2px 1fr;
+  grid-auto-rows: max-content; */
+
+  view-transition-name: main-nav;
+}
+
+
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  margin-block-start: var(--space-s);
+  border-radius: var(--border-radius);
+  background-color: var(--color-back-5);
+  transition: background-color var(--duration) var(--easing);
+}
+
+nav ul li:first-child {
+  margin-block-start: 0;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  max-inline-size: fit-content;
+  opacity: .9;
+  transition: opacity var(--duration) var(--easing);
+}
+
+nav:hover ul {
+  opacity: 1;
+}
+
+nav ul li a {
+  text-decoration: none;
+  border: none;
+  color: inherit;
+  display: block;
+  padding-inline: 2ch;
+  padding-block: var(--space-xs) var(--space-s);
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-medium);
+  /* text-transform: lowercase; */
+
+}
+
+nav ul li:hover,
+nav ul li.current {
+  background-color: var(--color-back-10);
+}
+
+nav ul li:active {
+  background-color: var(--color-back-15);
+}
+
+nav li>ul {
+  padding-inline-start: 2ch;
+  font-size: var(--step-0);
+}
+
+nav ul>li>ul {
+  visibility: hidden;
+  height: 0;
+}
+
+nav ul>li>ul:not(.open)>li {
+  margin: 0;
+}
+
+nav ul>li.current>ul,
+nav ul>li>ul.open {
+  visibility: visible;
+  height: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  nav {
+    position: fixed;
+    left: 0;
+    transform: translateX(-100vw);
+    background-color: var(--color-back);
+    width: 100%;
+    transition: transform var(--duration) var(--easing);
+    z-index: 100;
+    padding-inline-start: calc(var(--gap) + var(--space-xl));
+  }
+
+  nav>ul {
+    opacity: 1;
+  }
+
+}

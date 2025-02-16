@@ -1,0 +1,49 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ title }}</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link
+    rel="preload"
+    href="/assets/fonts/roboto-slab.var.subset.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin>
+<link
+    rel="preload"
+    href="/assets/fonts/ShantellSans-var.subset.opa.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin>
+<link rel="manifest" id="manifest" href="/manifest.light.webmanifest">
+<script>
+const usesDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const manifest = document.getElementById('manifest');
+if (usesDarkMode) {manifest.href = '/manifest.dark.webmanifest'};
+</script>
+{% comment %} <link rel="manifest" media="(prefers-color-scheme: dark)" href="/manifest.dark.webmanifest"> {% endcomment %}
+{% renderTemplate "njk" %}
+{% favicons './src/assets/icons/favicon.svg', appleIconBgColor='transparent' %}
+{% endrenderTemplate %}
+{% if config.gtag != '' and features.devMode == false %}
+  {% include 'partials/gtag.liquid' %}
+{% endif %}
+{% include 'partials/scripts.liquid' %}
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/assets/css/main.min.css" />
+<meta name="application-name" content="{{ config.name }}" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="{{config.metaThemeColorLight}}" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{config.metaThemeColorDark}}" />
+{% include 'partials/seo.liquid' %}
+
+<meta name="robots" content="noindex" />
+
+<script type="speculationrules">
+{
+  "prerender": [{
+    "where": {
+      "href_matches": "/*"
+    },
+    "eagerness": "moderate"
+  }]
+}
+</script>

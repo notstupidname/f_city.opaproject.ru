@@ -1,0 +1,24 @@
+#cta {
+  grid-column: 3/4;
+  margin-top: var(--space-2xl-3xl);
+  width: clamp(280px, 100%, 50ch);
+  margin-inline: auto;
+  text-align: center;
+
+  >div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+    justify-content: space-around;
+  }
+
+  a[href^="mailto:"] {
+    color: var(--color-primary);
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 1px;
+  }
+}
+
+#cta form {
+  margin-top: var(--space-l-xl);
+}

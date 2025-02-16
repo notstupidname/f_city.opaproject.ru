@@ -1,0 +1,64 @@
+#site-footer {
+  text-align: right;
+  margin-bottom: var(--gap);
+  margin-top: var(--space-xl-2xl);
+  opacity: 0.85;
+  font-size: var(--step--1);
+}
+
+#site-footer li {
+  margin-block-start: 0.5em;
+}
+
+#site-footer li a {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1ch;
+}
+
+#site-footer p.logo {
+  font-size: var(--step-4);
+  margin-block-start: 0;
+}
+
+#site-footer p.logo+p {
+  margin-block-start: .25em;
+}
+
+a.top {
+  margin-inline-start: auto;
+  text-align: right;
+  max-width: 15ch;
+  display: grid;
+  background: var(--color-back-5);
+  border-radius: var(--border-radius);
+  place-items: center;
+  padding: var(--space-m);
+  inline-size: fit-content;
+  margin-block-end: var(--space-s);
+  transition: background-color var(--duration) var(--easing);
+
+  &:hover {
+    background-color: var(--color-back-10);
+  }
+
+  &:active {
+    background-color: var(--color-back-15);
+  }
+}
+
+a.top svg {
+  stroke-width: 6em;
+  width: var(--space-l);
+  height: var(--space-l);
+  transition: all var(--duration) var(--easing);
+  stroke-linecap: round;
+  stroke: var(--color-text-30);
+}
+
+a.top:hover svg {
+  stroke-width: 7em;
+  stroke: var(--color-text-20)
+}
