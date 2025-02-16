@@ -4,7 +4,7 @@ const isCF = process.env.CF_PAGES == 1;
 // !!!
 // CHANGE THIS 
 // !!!
-const targetUrl = 'https://vangarden.opaproject.ru';
+const targetUrl = 'https://f_city.opaproject.ru';
 
 let baseUrl = isDev ? `http://localhost:8080` : targetUrl;
 
@@ -13,14 +13,14 @@ if (isCF && isDev) {
 }
 
 const config = {
-  name: 'ОПА/vangarden',
+  name: 'ОПА/f_city',
   lang: 'ru',
   locale: 'ru_RU',
   gtag: 'GTM-5P237L34', // Put Google Tag Manager tag here,like GTM-NQLKKG4
   baseUrl,
   logo: '/icon-512.png',
   social: ["https://www.facebook.com/", "https://instagram.com/"],
-  defaultTitle: 'ОПА/vangarden',
+  defaultTitle: 'ОПА/f_city',
   defaultDescription: 'Превращаем бетонные коробки в источник дохода',
   defaultImage: '/icon-512.png',
   authorName: 'Света Богданова',
