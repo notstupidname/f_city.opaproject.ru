@@ -1,7 +1,7 @@
 ---
 layout: layouts/project-pwa.liquid
 totop: 1
-title: ОПА/F_city
-makeProject: false
-project-name: f_city
+title: ОПА/F-city
+makeProject: true
+project-name: F-city
 ---
