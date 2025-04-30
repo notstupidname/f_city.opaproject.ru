@@ -185,7 +185,7 @@ html {
   color: var(--color-text);
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -195,7 +195,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-text);
-}
+} */
 
 svg {
   fill: var(--color-text);
