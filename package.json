@@ -1,7 +1,7 @@
 {
-  "name": "test.opaproject.ru",
+  "name": "f-city.opaproject.ru",
   "version": "1.0.0",
-  "description": "opa test project web site",
+  "description": "opa f-city project web site",
   "main": ".eleventy.js",
   "scripts": {
     "clean": "rimraf _site",
@@ -18,7 +18,11 @@
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^5.0.0",
     "@11ty/eleventy-navigation": "^0.3.5",
+    "@gltf-transform/core": "^4.2.0",
+    "@gltf-transform/extensions": "^4.2.0",
+    "@gltf-transform/functions": "^4.2.0",
     "@quasibit/eleventy-plugin-sitemap": "^2.2.0",
+    "draco3dgltf": "^1.5.7",
     "eleventy-plugin-gen-favicons": "^1.1.3",
     "eleventy-plugin-nesting-toc": "^1.3.0",
     "eleventy-plugin-time-to-read": "^1.3.0",

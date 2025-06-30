@@ -28,6 +28,9 @@ export default function (eleventyConfig) {
   // Watch for all files in src/asssets/
   eleventyConfig.addWatchTarget("src/assets/**/*.*");
 
+  // Remove src/models from watch to stop rebuilding on model optimization
+  eleventyConfig.watchIgnores.add("src/models");
+
   // PLUGINS
 
   // Local plugin

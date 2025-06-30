@@ -2,9 +2,80 @@ import fg from "fast-glob";
 import fs from "fs";
 import path from "path";
 
+import { NodeIO } from '@gltf-transform/core';
+import { KHRDracoMeshCompression } from '@gltf-transform/extensions';
+import { KHRMaterialsPBRSpecularGlossiness } from '@gltf-transform/extensions';
+import { EXTTextureWebP } from '@gltf-transform/extensions';
+import { draco } from '@gltf-transform/functions';
+import draco3d from 'draco3dgltf';
+import { weld, prune, textureCompress } from '@gltf-transform/functions';
+import sharp from 'sharp';
+
 import config from '../src/_data/config.js';
 
-export default function (eleventyConfig) {
+export default async function (eleventyConfig) {
+
+  // Check if file exist
+  eleventyConfig.addFilter("fileExist", (filePath) => {
+    filePath = "src" + filePath;
+    return fs.existsSync(filePath);
+  });
+
+  /**
+   * Transforms a file path to its minified version (e.g., 'style.css' -> 'style.min.css').
+   * @param {string} filePath The original file path.
+   * @returns {string} The minified file path.
+   */
+  function getMinifiedPath(filePath) {
+    const parsedPath = path.parse(filePath);
+    return path.format({
+      dir: parsedPath.dir,
+      name: `${parsedPath.name}.min`,
+      ext: parsedPath.ext,
+    });
+  }
+
+  // GLB Optimiziton
+  eleventyConfig.addAsyncShortcode('processGlb', async function (src) {
+    console.log("Starting GLB optimization");
+    const io = new NodeIO()
+      .registerExtensions([KHRDracoMeshCompression])
+      .registerExtensions([KHRMaterialsPBRSpecularGlossiness])
+      .registerExtensions([EXTTextureWebP])
+      .registerDependencies({
+        'draco3d.encoder': await draco3d.createEncoderModule()
+      });
+
+    const document = await io.read(src);
+    console.log("Successfully read file");
+
+    const root = document.getRoot();
+
+    // Change material roughness (can be done before or after)
+    for (const material of root.listMaterials()) {
+      material.setRoughnessFactor(0.85);
+      material.setMetallicFactor(0);
+      // Glass
+      if (material.getAlphaMode() == 'BLEND') {
+        material.setRoughnessFactor(0);
+        material.setMetallicFactor(1);
+      }
+    }
+
+    await document.transform(
+      weld(),
+      prune(),
+      draco({ method: 'edgebreaker' }),
+      textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [512, 512] })
+    );
+
+    console.log("Transformed with draco");
+
+    const minifiedName = getMinifiedPath(src);
+
+    await io.write(minifiedName, document);
+    console.log("Written document to disk");
+  });
 
   // Prefixes given URL with the site's base URL.
   eleventyConfig.addFilter('toAbsoluteUrl', (url) => { return new URL(url, config.baseUrl).href });
@@ -93,51 +164,5 @@ export default function (eleventyConfig) {
     return Intl.DateTimeFormat("en-CA", options).format(date);
   });
 
-  // 11-ty Image Plugin Shortcode FROM URL
-  // eleventyConfig.addShortcode("respImageURL", async function (src, alt, sizes = "100vw", loading = "lazy") {
-  //   if (alt === undefined) {
-  //       // You bet we throw an error on missing alt (alt="" works okay)
-  //       throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
-  //   }
-
-  //   const imageSrc = `src/${src}`;
-  //   const imageDir = `${path.dirname(src)}`;
-
-  //   let metadata;
-
-  //   try {
-  //       metadata = await Image(src, {
-  //           widths: [300, 600, 1100, 1500, 1800, 2000, 2400],
-  //           formats: ['webp', 'jpeg'],
-  //           outputDir: `./_site/img/`,
-  //           sharpJpegOptions: {
-  //               mozjpeg: true
-  //           }
-  //       });
-  //   } catch (e) {
-  //       // console.log(e);
-  //       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  //       <circle fill="blue" stroke="none" cx="500" cy="500" r="375"/>
-  //   </svg>`;
-  //   }
-
-
-  //   let lowsrc = metadata.jpeg[0];
-  //   let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
-  //   let loadingAttr = loading === 'lazy' ? 'loading="lazy"' : 'fetchpriority="high"';
-
-  //   return `<picture>
-  //       ${Object.values(metadata).map(imageFormat => {
-  //       return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
-  //   }).join("\n")}
-  //           <img
-  //               src="${lowsrc.url}"
-  //               width="${highsrc.width}"
-  //               height="${highsrc.height}"
-  //               alt="${alt}"
-  //               ${loadingAttr}
-  //               decoding="async">
-  //       </picture>`;
-  // });
 
 }

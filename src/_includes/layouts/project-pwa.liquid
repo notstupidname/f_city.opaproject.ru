@@ -15,21 +15,25 @@
     {% include 'partials/header-pwa.liquid' %}
     {% include 'partials/nav-pwa.liquid' %}
     <main class="stack">
-      <section class="banner feature color2">
-        <model-viewer 
-          src="/models/fc_250430.min.glb"
-          camera-controls
-          poster="/models/poster_color.png"
-          camera-orbit="0deg 40deg 24m"
-          field-of-view="22.98deg"
-          shadow-intensity="1"
-          shadow-softness="1"
-          environment-image="legacy"
-          exposure=".69"
-          tone-mapping="neutral"
-          ar-status="not-presenting">
-        </model-viewer>
-      </section>
+      {% assign modelFile = '/models/model.glb' | fileExist %}
+      {% if modelFile %}
+        {% processGlb 'src/models/model.glb' %}
+        <section class="banner feature color2">
+          <model-viewer 
+            src="/models/model.min.glb"
+            camera-controls
+            poster="/models/poster_color.png"
+            camera-orbit="0deg 40deg 24m"
+            field-of-view="22.98deg"
+            shadow-intensity="1"
+            shadow-softness="1"
+            environment-image="legacy"
+            exposure=".69"
+            tone-mapping="neutral"
+            ar-status="not-presenting">
+          </model-viewer>
+        </section>
+      {% endif %}
     {% for room in concept %}
       <section id="concept-{{forloop.index}}" class="stack">
         <h2>{{room.name}}</h2>
