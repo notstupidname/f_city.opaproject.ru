@@ -5,8 +5,9 @@
   "main": ".eleventy.js",
   "scripts": {
     "clean": "rimraf _site",
+    "prebuild": "mkdir -p ./draco-decoder && cp ./node_modules/draco3dgltf/* ./draco-decoder/",
     "start": "ELEVENTY_ENV=dev npx @11ty/eleventy --serve",
-    "build": "npx @11ty/eleventy",
+    "build": "npm run prebuild && npx @11ty/eleventy",
     "debug": "DEBUG=Eleventy* npx @11ty/eleventy",
     "watch": "ELEVENTY_ENV=dev npx @11ty/eleventy --watch --incremental"
   },

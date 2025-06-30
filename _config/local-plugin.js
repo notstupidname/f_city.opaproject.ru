@@ -1,5 +1,6 @@
 import fg from "fast-glob";
 import fs from "fs";
+import { promises as fsp } from 'fs';
 import path from "path";
 
 import { NodeIO } from '@gltf-transform/core';
@@ -12,6 +13,24 @@ import { weld, prune, textureCompress } from '@gltf-transform/functions';
 import sharp from 'sharp';
 
 import config from '../src/_data/config.js';
+
+
+// --- THE ROBUST FIX for CI/CD ---
+// Pre-load the Draco WASM binaries from our copied files once.
+// This is faster and guarantees it works on Cloudflare Pages.
+
+// 1. Define paths to the copied files
+const dracoDecoderPath = path.join(process.cwd(), 'draco-decoder', 'draco_decoder_gltf.wasm');
+const dracoEncoderPath = path.join(process.cwd(), 'draco-decoder', 'draco_encoder.wasm');
+
+// 2. Read the WASM files into memory buffers
+const dracoDecoderBuffer = await fsp.readFile(dracoDecoderPath);
+const dracoEncoderBuffer = await fsp.readFile(dracoEncoderPath);
+
+// 3. Create the modules by providing the WASM binary directly
+const dracoDecoderModule = await draco3d.createDecoderModule({ wasmBinary: dracoDecoderBuffer });
+const dracoEncoderModule = await draco3d.createEncoderModule({ wasmBinary: dracoEncoderBuffer });
+// ---
 
 export default async function (eleventyConfig) {
 
@@ -43,7 +62,8 @@ export default async function (eleventyConfig) {
       .registerExtensions([KHRMaterialsPBRSpecularGlossiness])
       .registerExtensions([EXTTextureWebP])
       .registerDependencies({
-        'draco3d.encoder': await draco3d.createEncoderModule()
+        'draco3d.decoder': dracoDecoderModule,
+        'draco3d.encoder': dracoEncoderModule,
       });
 
     const document = await io.read(src);
