@@ -85,7 +85,11 @@ export default async function (eleventyConfig) {
     await document.transform(
       weld(),
       prune(),
-      draco({ method: 'edgebreaker' }),
+      draco({
+        method: 'edgebreaker',
+        encodeSpeed: 0,
+        decodeSpeed: 0,
+      }),
       textureCompress({ encoder: sharp, targetFormat: 'webp', resize: [512, 512] })
     );
 
