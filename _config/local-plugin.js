@@ -73,7 +73,8 @@ export default async function (eleventyConfig) {
 
     const minifiedName = getMinifiedPath(src);
 
-    await io.write(minifiedName, document);
+    // Saving file with same name to avoid uploading >25Mb to CF.Pages
+    await io.write(src, document);
     console.log("Written document to disk");
   });
 
