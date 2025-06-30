@@ -15,9 +15,8 @@
     {% include 'partials/header-pwa.liquid' %}
     {% include 'partials/nav-pwa.liquid' %}
     <main class="stack">
-      {% assign modelFile = '/models/model.glb' | fileExist %}
+      {% assign modelFile = '/models/model.min.glb' | fileExist %}
       {% if modelFile %}
-        {% processGlb 'src/models/model.glb' %}
         <section class="banner feature color2">
           <model-viewer 
             src="/models/model.glb"
