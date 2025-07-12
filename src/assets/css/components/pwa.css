@@ -1,6 +1,7 @@
 body.pwa {
 
   --navtop: calc(var(--space-xl) + 2 * var(--gap));
+  --column-width: 80ch;
 
   & nav {
 
@@ -114,6 +115,25 @@ body.pwa {
     }
   }
 
+  & section.main-header {
+    margin-block-end: 0;
+  }
+
+  & details {
+    margin-inline: 0;
+
+    &>summary::after {
+      mix-blend-mode: normal;
+      background-blend-mode: difference;
+      background-color: var(--color-back-10);
+      padding: var(--space-m);
+      background-size: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: var(--border-radius);
+    }
+  }
+
   & figure {
     display: flex;
     flex-direction: column;
@@ -131,14 +151,21 @@ body.pwa {
   & .items {
     grid-template-columns: 1fr var(--space-s-l) var(--space-s-l) 1fr;
     gap: var(--space-m-l) 0;
-    margin-block-start: var(--space-xl);
+    margin-block-start: var(--space-s-l);
     transition: all var(--duration) var(--easing);
 
     & a {
       text-decoration-color: transparent;
+      border-radius: var(--border-radius);
+
 
       &:hover {
         text-decoration-color: var(--color-text-10);
+      }
+
+      &.checked-node {
+        outline: dashed 4px var(--color-primary);
+        outline-offset: 6px;
       }
     }
 
@@ -233,6 +260,18 @@ body.pwa {
     }
   }
 
+  &.design #site-header a.logo {
+    text-shadow: .1ch .1ch 4px red, .1ch -.1ch 4px blue, -.1ch 0 4px green;
+  }
 
+  & main :where(ul, ol):not([class]) {
+    list-style-type: disc;
+    padding-inline-start: 2ch;
+    /* font-weight: var(--font-weight-light); */
+
+    li:not(:first-child) {
+      margin-block-start: 1em;
+    }
+  }
 
 }

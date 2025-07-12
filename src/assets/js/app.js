@@ -61,4 +61,62 @@
         })
     })
 
+    // Design mode for items
+    document.addEventListener('keyup', (e) => {
+        if (e.ctrlKey && e.key === ',') {
+            console.log("design");
+            body.classList.add('design');
+
+            const nodesObject = {
+                nodeA: null,
+                nodeB: null
+            }
+
+            function swapNodes(a, b) {
+                console.log(`Swapd ${a.innerText} for ${b.innerText}`);
+                b.before(a);
+            }
+
+            const items = document.querySelectorAll('.items a');
+            for (const item of items) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (nodesObject.nodeA == null) {
+                        nodesObject.nodeA = this;
+                        nodesObject.nodeA.classList.add('checked-node');
+                    } else if (nodesObject.nodeA == this) {
+                        nodesObject.nodeA.classList.remove('checked-node');
+                        nodesObject.nodeA = null;
+                    } else {
+                        nodesObject.nodeA.classList.remove('checked-node');
+                        nodesObject.nodeA = this;
+                        nodesObject.nodeA.classList.add('checked-node');
+                    }
+                });
+            }
+
+            document.addEventListener('keyup', (e) => {
+                if (e.key == 'ArrowLeft') {
+                    e.preventDefault();
+                    if (nodesObject.nodeA) {
+                        console.log('Ready for swap');
+                        if (nodesObject.nodeA.previousElementSibling) {
+                            nodesObject.nodeA.after(nodesObject.nodeA.previousElementSibling);
+                        }
+                    }
+                }
+                if (e.key == 'ArrowRight') {
+                    e.preventDefault();
+                    if (nodesObject.nodeA) {
+                        console.log('Ready for swap');
+                        if (nodesObject.nodeA.nextElementSibling) {
+                            nodesObject.nodeA.before(nodesObject.nodeA.nextElementSibling);
+                        }
+                    }
+                }
+            });
+        }
+    }, { once: true });
+
 })();

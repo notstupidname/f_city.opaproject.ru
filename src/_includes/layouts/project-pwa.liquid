@@ -21,7 +21,7 @@
           <model-viewer 
             src="/models/model.min.glb"
             camera-controls
-            poster="/models/poster_color.png"
+            poster="/models/poster.png"
             camera-orbit="0deg 40deg 24m"
             field-of-view="22.98deg"
             shadow-intensity="1"
@@ -33,9 +33,23 @@
           </model-viewer>
         </section>
       {% endif %}
-    {% for room in concept %}
-      <section id="concept-{{forloop.index}}" class="stack">
-        <h2>{{room.name}}</h2>
+      {% if content.length > 10 %}
+      <section class="popout color-primary main-header">
+        <h1>Концепция</h1>
+      </section>
+      {{ content }}
+      {% endif %}
+      {% for room in concept %}
+      <section id="concept-{{forloop.index}}" class="stack popout">
+        {% if room.text.length > 4 %}
+        <details class="stack color1">
+          <summary><h2>{{room.name}}</h2></summary>
+          <p>{{ room.text | markdown }}</p>
+        </details>
+        {% else %}
+        <h2 class="color1">{{room.name}}</h2>
+        
+        {% endif %}
         {% for pic in room.pics %}
           <figure>
             {% if pic.imgurl != "" %}
