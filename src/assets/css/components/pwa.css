@@ -221,7 +221,7 @@ body.pwa {
 
   & .card {
     display: flex;
-    gap: var(--space-xs);
+    gap: var(--space-xs-l);
     border-block-end: solid 1px var(--color-back-5);
     padding-block-end: var(--space-2xs);
 
