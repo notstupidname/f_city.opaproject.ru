@@ -61,6 +61,14 @@
         })
     })
 
+    // Print button
+    const printButton = document.querySelector('.print-button');
+    if (printButton) {
+        printButton.addEventListener('click', () => {
+            window.print();
+        })
+    }
+
     // Design mode for items
     document.addEventListener('keyup', (e) => {
         if (e.ctrlKey && e.key === ',') {

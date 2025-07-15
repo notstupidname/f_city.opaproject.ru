@@ -105,6 +105,26 @@ body.pwa {
     }
   }
 
+  & #site-header {
+    justify-content: space-between;
+
+    & button.print-button {
+      padding: var(--space-s);
+      font-size: var(--step-2);
+      border-radius: 50%;
+      box-shadow: none;
+
+      & svg.icon {
+        height: 1em;
+
+        & path {
+          stroke-width: 2px;
+          fill: none;
+        }
+      }
+    }
+  }
+
   & .banner {
     min-block-size: 70vh;
     padding: 0;
@@ -274,4 +294,73 @@ body.pwa {
     }
   }
 
+}
+
+@media print {
+  :root {
+    --color-back: #fff;
+    --color-text: #000;
+    --color-primary: #e69679;
+  }
+
+  body.pwa {
+
+    nav,
+    #site-header label,
+    section.banner,
+    #site-footer {
+      display: none;
+    }
+
+    #site-header {
+      position: relative;
+
+      & .logo span:nth-child(3) {
+        color: var(--color-primary);
+      }
+    }
+
+    &>main>section {
+      grid-column: content;
+      padding-inline: 0;
+      background: var(--color-back);
+      page-break-before: always;
+      page-break-inside: avoid;
+      break-before: page;
+      break-inside: avoid;
+      margin-block-start: 0;
+    }
+
+    section.main-header {
+      page-break-before: avoid;
+      break-before: avoid;
+    }
+
+    .card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    details {
+      padding-inline: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      page-break-after: avoid;
+    }
+
+  }
+
+
+
+
+
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
 }
