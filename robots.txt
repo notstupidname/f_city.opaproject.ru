@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+Host: https://f_city.opaproject.ru
+Sitemap: https://f_city.opaproject.ru/sitemap.xml
