@@ -1,6 +1,5 @@
 import fg from "fast-glob";
 import fs from "fs";
-import path from "path";
 
 import config from '../src/_data/config.js';
 
@@ -92,52 +91,5 @@ export default function (eleventyConfig) {
     };
     return Intl.DateTimeFormat("en-CA", options).format(date);
   });
-
-  // 11-ty Image Plugin Shortcode FROM URL
-  // eleventyConfig.addShortcode("respImageURL", async function (src, alt, sizes = "100vw", loading = "lazy") {
-  //   if (alt === undefined) {
-  //       // You bet we throw an error on missing alt (alt="" works okay)
-  //       throw new Error(`Missing \`alt\` on responsiveimage from: ${src}`);
-  //   }
-
-  //   const imageSrc = `src/${src}`;
-  //   const imageDir = `${path.dirname(src)}`;
-
-  //   let metadata;
-
-  //   try {
-  //       metadata = await Image(src, {
-  //           widths: [300, 600, 1100, 1500, 1800, 2000, 2400],
-  //           formats: ['webp', 'jpeg'],
-  //           outputDir: `./_site/img/`,
-  //           sharpJpegOptions: {
-  //               mozjpeg: true
-  //           }
-  //       });
-  //   } catch (e) {
-  //       // console.log(e);
-  //       return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  //       <circle fill="blue" stroke="none" cx="500" cy="500" r="375"/>
-  //   </svg>`;
-  //   }
-
-
-  //   let lowsrc = metadata.jpeg[0];
-  //   let highsrc = metadata.jpeg[metadata.jpeg.length - 1];
-  //   let loadingAttr = loading === 'lazy' ? 'loading="lazy"' : 'fetchpriority="high"';
-
-  //   return `<picture>
-  //       ${Object.values(metadata).map(imageFormat => {
-  //       return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
-  //   }).join("\n")}
-  //           <img
-  //               src="${lowsrc.url}"
-  //               width="${highsrc.width}"
-  //               height="${highsrc.height}"
-  //               alt="${alt}"
-  //               ${loadingAttr}
-  //               decoding="async">
-  //       </picture>`;
-  // });
 
 }
